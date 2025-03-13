@@ -1,0 +1,13 @@
+{
+  "workingFolder": "packages",
+  "packages": [
+    {
+      "name": "avm-bicep/utl-common-types",
+      "version": "0.2.1"
+    },
+    {
+      "name": "avm-bicep/ops-management-solution",
+      "version": "0.3.0"
+    }
+  ]
+}

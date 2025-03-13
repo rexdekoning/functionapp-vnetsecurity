@@ -1,0 +1,17 @@
+{
+  "workingFolder": "packages",
+  "packages": [
+    {
+      "name": "avm-bicep/utl-common-types",
+      "downloadStrategy": "Multiple",
+      "versions": [
+        "0.4.0",
+        "0.2.1"
+      ]
+    },
+    {
+      "name": "avm-bicep/private-endpoints",
+      "version": "0.9.0"
+    }
+  ]
+}

@@ -1,0 +1,9 @@
+{
+  "workingFolder": "packages",
+  "packages": [
+    {
+      "version": "0.5.1",
+      "name": "avm-bicep/public-ip-addresses"
+    }
+  ]
+}

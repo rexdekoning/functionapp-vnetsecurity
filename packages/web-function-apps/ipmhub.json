@@ -1,0 +1,9 @@
+{
+  "workingFolder": "packages",
+  "packages": [
+    {
+      "name": "avm-bicep/private-endpoints",
+      "version": "0.7.1"
+    }
+  ]
+}

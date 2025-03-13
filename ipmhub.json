@@ -1,0 +1,85 @@
+{
+  "workingFolder": "packages",
+  "packages": [
+    {
+      "name": "avm-bicep/resource-groups",
+      "version": "0.4.0"
+    },
+    {
+      "name": "avm-bicep/virtual-networks",
+      "version": "0.5.1"
+    },
+    {
+      "name": "avm-bicep/web-function-apps",
+      "version": "0.12.0"
+    },
+    {
+      "name": "avm-bicep/firewalls",
+      "version": "0.5.1"
+    },
+    {
+      "name": "avm-bicep/firewall-policies",
+      "version": "0.2.0"
+    },
+    {
+      "name": "avm-bicep/app-service-plan",
+      "version": "0.3.0"
+    },
+    {
+      "name": "avm-bicep/storage-accounts",
+      "version": "0.15.0"
+    },
+    {
+      "name": "avm-bicep/nat-gateways",
+      "version": "1.2.1"
+    },
+    {
+      "name": "avm-bicep/public-ip-addresses",
+      "version": "0.7.0"
+    },
+    {
+      "name": "avm-bicep/private-endpoints",
+      "version": "0.9.0"
+    },
+    {
+      "name": "avm-bicep/private-link-services",
+      "version": "0.2.0"
+    },
+    {
+      "name": "avm-bicep/private-dns-zones",
+      "version": "0.7.0"
+    },
+    {
+      "name": "avm-bicep/p2s-vpn-gateway",
+      "version": "0.1.0"
+    },
+    {
+      "name": "avm-bicep/virtual-machines",
+      "version": "0.11.0"
+    },
+    {
+      "name": "avm-bicep/virtual-network-gateways",
+      "version": "0.5.0"
+    },
+    {
+      "name": "avm-bicep/log-analytics-avd-workspaces",
+      "version": "0.9.0"
+    },
+    {
+      "name": "avm-bicep/insights-diagnostic-setting",
+      "version": "0.1.3"
+    },
+    {
+      "name": "avm-bicep/route-tables",
+      "version": "0.4.0"
+    },
+    {
+      "name": "avm-bicep/network-security-groups",
+      "version": "0.5.0"
+    },
+    {
+      "name": "avm-bicep/bastion-hosts",
+      "version": "0.5.0"
+    }
+  ]
+}

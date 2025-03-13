@@ -1,0 +1,9 @@
+{
+  "workingFolder": "packages",
+  "packages": [
+    {
+      "version": "0.2.1",
+      "name": "avm-bicep/utl-common-types"
+    }
+  ]
+}

@@ -1,1 +1,0 @@
-# functionapp-vnetsecurity
