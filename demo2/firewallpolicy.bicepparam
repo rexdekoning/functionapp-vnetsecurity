@@ -46,6 +46,35 @@ param ruleCollectionGroups = [
           }
         ]
       }
+      {
+        action: {
+          type: 'Allow'
+        }
+        name: 'networkRuleCollection001'
+        priority: 200
+        ruleCollectionType: 'FirewallPolicyFilterRuleCollection'
+        rules: [
+          {
+            ruleType: 'NetworkRule'
+            name: 'donotuseinprodnw'
+            destinationAddresses: [
+              '*'
+            ]
+            destinationFqdns: []
+            destinationIpGroups: []
+            destinationPorts: [
+              '*'
+            ]
+            ipProtocols: [
+              'Any'
+            ]
+            sourceAddresses: [
+              '*'
+            ]
+            sourceIpGroups: []
+          }
+        ]
+      }      
     ]
   }
 ]

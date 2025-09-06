@@ -1,5 +1,6 @@
 {
   "workingFolder": "packages",
+  "associations": [],
   "packages": [
     {
       "name": "avm-bicep/resource-groups",
@@ -62,10 +63,6 @@
       "version": "0.5.0"
     },
     {
-      "name": "avm-bicep/log-analytics-avd-workspaces",
-      "version": "0.9.0"
-    },
-    {
       "name": "avm-bicep/insights-diagnostic-setting",
       "version": "0.1.3"
     },
@@ -80,6 +77,22 @@
     {
       "name": "avm-bicep/bastion-hosts",
       "version": "0.5.0"
+    },
+    {
+      "name": "avm-bicep/api-management-services",
+      "version": "0.9.1"
+    },
+    {
+      "name": "avm-bicep/log-analytics-workspaces",
+      "version": "0.11.0"
+    },
+    {
+      "name": "avm-bicep/user-assigned-identities",
+      "version": "0.4.1"
+    },
+    {
+      "name": "avm-bicep/cdn-profiles",
+      "version": "0.14.0"
     }
   ]
 }

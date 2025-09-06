@@ -1,10 +1,12 @@
 #region general
-$subscriptionID = "[Enter SubscriptionId]"
-$tenantId       = "[Enter TenantId]"
+$subscriptionID = "[subscriptionid]"
+$tenantId       = "[tenantid]"
 $location       = "westeurope"
 
 az login --tenant $tenantId --use-device-code
 az account set --subscription $subscriptionID
+
+
 
 #endregion
 
@@ -48,8 +50,6 @@ az deployment group create  --name functionappcode0 --parameters ./common/trigge
                             --parameters functionappname=$functionAppName `
                             --parameters functionname=$triggerName
 
-#az webapp restart --name $functionAppName --resource-group $resourceGroupName
-
 (Invoke-WebRequest -uri "https://$functionAppName.azurewebsites.net/api/$($triggerName)?").Content
 
 #endregion
@@ -64,7 +64,7 @@ $appServicePlanSku  = "B1"
 $functionAppName    = "apptestrdk1"
 $triggerName        = "trigger1"
 $NatGWName          = "myNatGateway1"
-$NatGWIPName        = "pip-$NatGWName"
+$NatGWIPName        = ("pip-$NatGWName").ToLower()
 $subnetName         = "snFunctionOut"
 
 az deployment sub create    --parameters ./common/resourcegroup.bicepparam --location $location `
@@ -128,11 +128,15 @@ $subnetName          = "snFunctionOut"
 $FWPIPName           = "pip-firewall"
 $VNGPIPName          = "pip-vng"
 $BastionPIPName      = "pip-bastion"
+$APIMPIPName         = "pip-apim"
+$APIMName            = "apimrex$(Get-Date -Format "yyyyMMdd")"
+$PublisherEmail      = "rexdekoning@outlook.com"
+$PublisherName       = "Rex de Koning"
+$FrontDoorName      = "fdtest"
 
 az deployment sub create    --parameters ./common/resourcegroup.bicepparam --location $location `
                             --parameters name=$resourceGroupName `
                             --parameters location=$location
-
 
 $rt   = az deployment group create  --name routetable --parameters ./$resourceGroupName/routetable.bicepparam `
                                     --resource-group $resourceGroupName | ConvertFrom-Json | `
@@ -145,8 +149,15 @@ $rtgw = az deployment group create  --name routetablegw --parameters ./$resource
                                     Select-Object -ExpandProperty outputResources | `
                                     Select-Object -ExpandProperty id
 
+$apimNsgId = az deployment group create  --name apimnsg --parameters ./$resourceGroupName/apimnsg.bicepparam `
+                                    --resource-group $resourceGroupName | ConvertFrom-Json | `
+                                    Select-Object -ExpandProperty properties | `
+                                    Select-Object -ExpandProperty outputResources | `
+                                    Select-Object -ExpandProperty id
+
 New-Item -Path Env:\RouteTable   -Value $rt -Force
 New-Item -Path Env:\RouteTableGW -Value $rtgw -Force
+New-Item -Path Env:\ApimNsgId -Value $apimNsgId -Force
 
 $vnet1 = az deployment group create     --name vnet1 --parameters ./$resourceGroupName/vnet1.bicepparam `
                                         --resource-group $resourceGroupName --parameters name=$virtualNetworkName1 `
@@ -164,12 +175,17 @@ $vnet3 = az deployment group create     --name vnet3 --parameters ./$resourceGro
                                         Select-Object -ExpandProperty outputResources | `
                                         Select-Object -ExpandProperty id                                                                              
 
-$vnet1Id    = $vnet1 | Select-Object -First 1
-$vnet2Id    = $vnet2 | Select-Object -First 1
-$vnet3Id    = $vnet3 | Select-Object -First 1
-$subnetId   = $vnet2 | Where-Object {$_ -like "*out"}
-$peSubnetId = $vnet2 | Where-Object {$_ -like "*PrivateEndpoint"}
-$mySubnetId = $vnet3 | Where-Object {$_ -like "*mySubnet"}
+$vnet1Id      = $vnet1 | Select-Object -First 1
+$vnet2Id      = $vnet2 | Select-Object -First 1
+$vnet3Id      = $vnet3 | Select-Object -First 1
+$subnetId     = $vnet2 | Where-Object {$_ -like "*out"}
+$peSubnetId   = $vnet2 | Where-Object {$_ -like "*PrivateEndpoint"}
+$apimSubnetId = $vnet2 | Where-Object {$_ -like "*Apim"}
+$mySubnetId   = $vnet3 | Where-Object {$_ -like "*mySubnet"}
+
+New-Item -Path Env:\VNet1Id -Value $vnet1Id -Force
+New-Item -Path Env:\VNet2Id -Value $vnet2Id -Force
+New-Item -Path Env:\VNet3Id -Value $vnet3Id -Force
 
 az network vnet peering create -g $resourceGroupName -n MyVnet1ToMyVnet2 --vnet-name $virtualNetworkName1 --remote-vnet $vnet2Id --allow-vnet-access
 az network vnet peering create -g $resourceGroupName -n MyVnet1ToMyVnet3 --vnet-name $virtualNetworkName1 --remote-vnet $vnet3Id --allow-vnet-access
@@ -177,11 +193,14 @@ az network vnet peering create -g $resourceGroupName -n MyVnet2ToMyVnet1 --vnet-
 az network vnet peering create -g $resourceGroupName -n MyVnet3ToMyVnet1 --vnet-name $virtualNetworkName3 --remote-vnet $vnet1Id --allow-vnet-access
 
 New-Item -Path Env:\mySubnetId -Value $mySubnetId -Force
+New-Item -Path Env:\ApimSubnetId -Value $apimSubnetId -Force
 az deployment group create --name vm --parameters ./$resourceGroupName/vm.bicepparam --resource-group $resourceGroupName
 
 $firewallpip = az deployment group create --name fwgwpip --parameters ./common/publicip.bicepparam --resource-group $resourceGroupName  --parameters name=$FWPIPName | ConvertFrom-Json | Select-Object -ExpandProperty properties | Select-Object -ExpandProperty outputResources | Select-Object -ExpandProperty id
 $vngpip      = az deployment group create --name vngpip --parameters ./common/publicip.bicepparam --resource-group $resourceGroupName  --parameters name=$VNGPIPName | ConvertFrom-Json | Select-Object -ExpandProperty properties | Select-Object -ExpandProperty outputResources | Select-Object -ExpandProperty id
 $bastionpip  = az deployment group create --name bastionip --parameters ./common/publicip.bicepparam --resource-group $resourceGroupName  --parameters name=$BastionPIPName | ConvertFrom-Json | Select-Object -ExpandProperty properties | Select-Object -ExpandProperty outputResources | Select-Object -ExpandProperty id
+$apimpip     = az deployment group create --name bastionip --parameters ./common/publicip.bicepparam --resource-group $resourceGroupName  --parameters name=$APIMPIPName | ConvertFrom-Json | Select-Object -ExpandProperty properties | Select-Object -ExpandProperty outputResources | Select-Object -ExpandProperty id
+
 
 az deployment group create  --name bastion --parameters ./$resourceGroupName/bastion.bicepparam --resource-group $resourceGroupName `
                             --parameters virtualNetworkResourceId=$vnet3Id `
@@ -197,11 +216,10 @@ az deployment group create --name firewall  --parameters ./$resourceGroupName/fi
                                             --parameters publicIPResourceID=$firewallpip `
                                             --parameters firewallPolicyId=$fwpolicy
 
-
 New-Item -Path Env:\TenantId -Value $tenantId -Force
 az deployment group create  --name vng --parameters ./$resourceGroupName/p2s.bicepparam --resource-group $resourceGroupName `
                             --parameters existingFirstPipResourceId=$vngpip `
-                            --parameters vNetResourceId=$vnet1id
+                            --parameters vNetResourceId=$vnet1id --no-wait
 
 
 $storageId      = az deployment group create    --name storageaccount --parameters ./common/storage.bicepparam `
@@ -238,14 +256,6 @@ $WebAppID = az deployment group create  --name functionapp --parameters ./common
                                         Select-Object -ExpandProperty outputResources | `
                                         Select-Object -ExpandProperty id -First 1
 
-az deployment group create  --name functionappcode --parameters ./common/trigger.bicepparam --resource-group $resourceGroupName `
-                            --parameters functionappname=$functionAppName `
-                            --parameters functionname=$triggerName
-
-New-Item -Path Env:\VNet1Id -Value $vnet1Id -Force
-New-Item -Path Env:\VNet2Id -Value $vnet2Id -Force
-New-Item -Path Env:\VNet3Id -Value $vnet3Id -Force
-
 $storageZone = az deployment group create   --name privdnsstorage --parameters ./$resourceGroupName/privatednszonestorage.bicepparam `
                                             --resource-group $resourceGroupName | `
                                             ConvertFrom-Json | Select-Object -ExpandProperty properties | `
@@ -273,8 +283,34 @@ $webAppPE   = az deployment group create   --name webappstorage --parameters ./$
                                             --resource-group $resourceGroupName `
                                             --parameters subnetResourceId=$peSubnetId
 
-#az webapp restart --name $functionAppName --resource-group $resourceGroupName
+az deployment group create  --name functionappcode --parameters ./common/trigger.bicepparam --resource-group $resourceGroupName `
+                            --parameters functionappname=$functionAppName `
+                            --parameters functionname=$triggerName
+
+New-Item -Path Env:\ApimPipId -Value $apimpip -Force
+New-Item -Path Env:\ApimServiceURL -Value "https://$functionAppName.azurewebsites.net/api/$($triggerName)?" -Force
+
+$apim = az deployment group create --name apim --parameters ./$resourceGroupName/apim.bicepparam `
+                                    --resource-group $resourceGroupName `
+                                    --parameters subnetResourceId=$apimSubnetId `
+                                    --parameters publicIpAddressResourceId=$apimpip `
+                                    --parameters publisherEmail=$PublisherEmail `
+                                    --parameters publisherName=$PublisherName `
+                                    --parameters name=$APIMName `
+                                    --no-wait 
+
+
+New-Item -Path Env:\FDHostname -Value "$functionAppName.azurewebsites.net" -Force                                
+$FrontDoor = az deployment group create --name frontdoor --parameters ./demo2/frontdoor.bicepparam `
+                                        --parameters name=$FrontDoorName `
+                                        --resource-group $resourceGroupName 
+
+$EndPoint =  ($FrontDoor | ConvertFrom-Json).properties.outputs.frontDoorEndPointHostNames.Value        
+$pe = az network private-endpoint-connection list -g $resourceGroupName  --id $WebAppID | ConvertFrom-Json
+
+$pe | where-object { $_.properties.privateLinkServiceConnectionState.status -eq "Pending" } | `
+    ForEach-Object { az network private-endpoint-connection approve --id $_.id --description "Approved by script" }
 
 (Invoke-WebRequest -uri "https://$functionAppName.azurewebsites.net/api/$($triggerName)?").Content
-#https://apptestrdk2.azurewebsites.net/api/trigger1?
+(Invoke-WebRequest -uri "https://$EndPoint/api/trigger1?").Content
 #endregion

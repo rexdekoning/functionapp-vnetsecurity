@@ -9,13 +9,13 @@ param virtualNetworkSubnetId                  = ''
 param storageAccountUseIdentityAuthentication = true
 param appSettingsKeyValuePairs                = null
 param vnetRouteAllEnabled                     = true
+param storageAccountRequired                  = true
 
 param siteConfig = {
   alwaysOn: true
   minTlsVersion: '1.2'
   ftpsState: 'FtpsOnly'
-  netFrameworkVersion: 'v8.0'
-  powerShellVersion: '7.4'
+  linuxFxVersion: 'PowerShell|7.4'
   vnetRouteAllEnabled: true
   cors: {
     allowedOrigins: [
@@ -42,6 +42,13 @@ param siteConfig = {
     }
   ]
 }
+// param managedIdentities = {
+//   systemAssigned: false
+//   userAssignedResourceIds: [
+//     readEnvironmentVariable('ManagedIdentity')
+//   ]
+// }
+
 param managedIdentities = {
   systemAssigned: true
 }
