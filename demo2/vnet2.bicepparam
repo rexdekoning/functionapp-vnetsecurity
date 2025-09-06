@@ -26,4 +26,10 @@ param subnets = [
     addressPrefix: '10.1.1.128/26'
     routeTableResourceId: readEnvironmentVariable('RouteTable')
   }
+  {
+    name: 'Apim'
+    addressPrefix: '10.1.1.192/26'
+    //routeTableResourceId: readEnvironmentVariable('RouteTable')
+    networkSecurityGroupResourceId: readEnvironmentVariable('ApimNsgId')
+  }
 ]

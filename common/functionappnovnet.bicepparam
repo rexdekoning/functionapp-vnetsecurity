@@ -13,8 +13,7 @@ param siteConfig = {
   alwaysOn: true
   minTlsVersion: '1.2'
   ftpsState: 'FtpsOnly'
-  netFrameworkVersion: 'v8.0'
-  powerShellVersion: '7.4'
+  linuxFxVersion: 'POWERSHELL|7.4'
   vnetRouteAllEnabled: true
   cors: {
     allowedOrigins: [

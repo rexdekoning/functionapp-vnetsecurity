@@ -1,3 +1,3 @@
-using '../packages/log-analytics-avd-workspaces/main.bicep'
+using '../packages/log-analytics-workspaces/main.bicep'
 
 param name = 'myWorkspace'

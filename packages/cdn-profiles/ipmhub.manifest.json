@@ -1,0 +1,119 @@
+﻿{
+  "timeStamp": "2025-07-04T06:38:40.0703971+00:00",
+  "hash": "SHA256:3b133e6a5c3b6ee0864020e2dc01a7cf036906e958a2f9f295d5a4eca4faa0cf",
+  "totalFiles": 28,
+  "files": [
+    {
+      "path": "CHANGELOG.md",
+      "hash": "SHA256:56ed78cf92240515987650967680cef3c30c0ab545dfa84cd4ff193747a1b31d"
+    },
+    {
+      "path": "DISCLAIMER.md",
+      "hash": "SHA256:226c1f925807c9213d04f88033b10bf90b9e4d5bbf0dc3d9c786f6430b4fd449"
+    },
+    {
+      "path": "ipmhub.json",
+      "hash": "SHA256:fe9bfdec3fee35b1e5ba6fe9d0cdae24f4810b1801dbf7b9b6e1a1d37ec85b7d"
+    },
+    {
+      "path": "LICENSE.txt",
+      "hash": "SHA256:c2cfccb812fe482101a8f04597dfc5a9991a6b2748266c47ac91b6a5aae15383"
+    },
+    {
+      "path": "main.bicep",
+      "hash": "SHA256:10e62ad9370d8895ffe992ec6e796020c518a33d3d8f32913585d5b05f2fd4ff"
+    },
+    {
+      "path": "README.md",
+      "hash": "SHA256:a787350a07e2fd441a91984ac2b36cf7591e98786b2405981eee9d66e632df96"
+    },
+    {
+      "path": "afd-endpoint/main.bicep",
+      "hash": "SHA256:372286abd104d363b602606b623c81f6fbb2ad1978df2116c09d1773fc49ebc8"
+    },
+    {
+      "path": "afd-endpoint/README.md",
+      "hash": "SHA256:cfedf4ebc520f2db430a818e5bfce09ef6fde10a1fb44ffa2c759aeed20179b3"
+    },
+    {
+      "path": "afd-endpoint/route/main.bicep",
+      "hash": "SHA256:5f080128bf8c7d7d9c71beefbceb6a1a8a23146ad0fe1c8925c5b48b7f26f7e9"
+    },
+    {
+      "path": "afd-endpoint/route/README.md",
+      "hash": "SHA256:644fa692060e355f4514a466b68761745cc58dcf41a007e9677825e2de68ab56"
+    },
+    {
+      "path": "custom-domain/main.bicep",
+      "hash": "SHA256:b0751448c5acedd2d4e4323d759105731ac5bd5adda135b9e4b0941e1d5567ec"
+    },
+    {
+      "path": "custom-domain/README.md",
+      "hash": "SHA256:0ee1aaf95e904a2ccdb4df7f83c840db1c5570b5b0886e47b717380df220d432"
+    },
+    {
+      "path": "endpoint/main.bicep",
+      "hash": "SHA256:9790ec83a9226f6f4a3b87320d5a8f148bf02e178f8db47c747b2b588073cbb5"
+    },
+    {
+      "path": "endpoint/README.md",
+      "hash": "SHA256:5438bb2a1f11914a814074a5e8a6edc2fe2d43e355be41e3052811dec8de65c4"
+    },
+    {
+      "path": "endpoint/origin/main.bicep",
+      "hash": "SHA256:24ba1f3d63f435d6f32fe6cd652dd48e858e2b5db83ca5eb732b52694d57c92f"
+    },
+    {
+      "path": "endpoint/origin/README.md",
+      "hash": "SHA256:cc125f84fc336465e4e38ed89451a49b0dff38cb4f95e21afea271247cb30ad2"
+    },
+    {
+      "path": "origin-group/main.bicep",
+      "hash": "SHA256:7fb9851f982df8fc267caaceb35951085155d8f5769a2a079bd0c2e6f620264e"
+    },
+    {
+      "path": "origin-group/README.md",
+      "hash": "SHA256:f30b1a051cadca208ecfd16ecbd9676329f4619323f93d2378e67d287b316336"
+    },
+    {
+      "path": "origin-group/origin/main.bicep",
+      "hash": "SHA256:bc5cc7c9a41d1ac04e5125f5c160b3fc36f6c2a2ac5d8e3cb8be62a4d8c99b0d"
+    },
+    {
+      "path": "origin-group/origin/README.md",
+      "hash": "SHA256:1c00624f6801aedfc40a0f88debc08cd1a9b0fafeabea58096773bc1486c7166"
+    },
+    {
+      "path": "rule-set/main.bicep",
+      "hash": "SHA256:275c962dbd57e53512e731412aa3242ccba5e4f9fbcf0f6bf240684ebd207e6b"
+    },
+    {
+      "path": "rule-set/README.md",
+      "hash": "SHA256:cdb7b91d323e8dae2b6a27862bf88ae04fc2a0dfcbff50cc708195d48b2c63d5"
+    },
+    {
+      "path": "rule-set/rule/main.bicep",
+      "hash": "SHA256:3b59a9c6e194f5dbc4e6127623972cc9eea529644209d51238d5bf93d5e068b0"
+    },
+    {
+      "path": "rule-set/rule/README.md",
+      "hash": "SHA256:63bd72199a84fba1d076694c82563ec2fa68a96a5b36c0775401ea3edc97774d"
+    },
+    {
+      "path": "secret/main.bicep",
+      "hash": "SHA256:ea161e2b5429ea9c9da6e871edfd745c551c847bff52b28f209c2fd0a9787b8e"
+    },
+    {
+      "path": "secret/README.md",
+      "hash": "SHA256:bbb68680d67309d9970f421fab4b3df1bbaa6c081b053d4145e47a21fffadbdd"
+    },
+    {
+      "path": "security-policy/main.bicep",
+      "hash": "SHA256:0debc4714249a4b521f2159d32ba15cb3da1d1e8a543b6d8000e3d70bc5c054a"
+    },
+    {
+      "path": "security-policy/README.md",
+      "hash": "SHA256:94ed33c0a141bc10031d0806b5c97b063dd355a2296722bcbb4a067b4de9491d"
+    }
+  ]
+}

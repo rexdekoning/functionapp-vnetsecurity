@@ -16,8 +16,8 @@ param osDisk = {
     storageAccountType: 'Standard_LRS'
   }
 }
-param adminUsername = 'rex'
-param adminPassword = 'NietVertellenim@1'
+param adminUsername = 'azureadmin'
+param adminPassword = 'myverysecretpassword@1'
 param zone = 1
 param nicConfigurations = [
   {
